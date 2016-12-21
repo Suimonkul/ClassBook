@@ -1,1 +1,1 @@
-web: gunicorn ClassBook.wsgi
+web: gunicorn ClassBook.wsgi --log-file--

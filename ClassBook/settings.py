@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
+import dj_database_url
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -104,15 +107,21 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
 
-LANGUAGE_CODE = 'ru-RU'
+LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Bishkek'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static_in_env", "static_root")
@@ -120,7 +129,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static_in_env", "static_root")
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static_in_pro", "our_static"),
 )
-
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "static_in_env", "media_root")
