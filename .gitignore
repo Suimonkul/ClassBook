@@ -1,13 +1,5 @@
-# Python bytecode:
-*.py[co]
-
-# Packaging files:
-*.egg*
-
-# Sphinx docs:
-build
-
-# SQLite3 database files:
+venv
+*.pyc
+staticfiles
+.env
 db.sqlite3
-
-.idea
